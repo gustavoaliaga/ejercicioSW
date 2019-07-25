@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blog Post</title>
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald|PT+Sans+Narrow&display=swap" rel="stylesheet">
+    
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://kit.fontawesome.com/3e6ed313bf.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/all.min.js"></script>
+</head>
+<body>
+    
+    <header class="site-header">
+        <div class="hero">
+            <div class="content-header">
+                <nav class="social-networks">
+                    <a href="https://azure.microsoft.com/es-mx/free/search/?&OCID=AID2000049_SEM_g71sH5MD&MarinID=g71sH5MD_340858552787_azure_e_c__62389742054_aud-411628295274:kwd-49508422&lnkd=Google_Azure_Brand&dclid=CjkKEQjwpuXpBRDG4vap5eX-2cYBEiQAKQvyr6rY8Iop0cfKSjFeaQ_cqJCi98g7ivVY4Tah9-agRVLw_wcB" class="social"><i class="fab fa-windows"></i></a>
+                </nav>
+                <div class="title">
+                    <h1 class="site-name">Azure Functions with Docker</h1>
+                    <p class="slogan">Something more than a mere computer without an event-based server</p>
+                </div><!--.title-->
+            </div><!--.content-header-->
+        </div><!--.hero-->
+    </header>
+
+    <div class="container">
+        <section class="section container">
+            <h2 class="center-text">What is Azure Functions?</h2>
+            <div class="icon">
+                <img src="./img/azure-functions.png" alt="imagen Azure Functions">
+            </div>
+            
+            <a class="btn btn-video" href="https://www.youtube.com/watch?time_continue=1&v=8-jz5f_JyEQ">Watch Video</a>
+
+            <p><span class="m-left"></span><span class="upper">Azure Functions</span> is a solution for running relatively small pieces of code in the cloud. 
+            As I said previously, the only thing you have to worry about when using Azure Functions 
+            is writing code to solve your problems, nothing else. 
+            You can do it in C#, Node.js, PHP, Python and more, 
+            and you can use NuGet or NPM to manage your dependencies, 
+            it’s not so different from what you’d normally do to develop an application. 
+            Azure scales out and down when needed so you only pay for the time 
+            your code runs and supports continuous integration.</p>
+        </section><!--.section-->
+
+        <section class="section container">
+            <h3>What do you need to start developing?</h3>
+            <div class="entry-container">
+                <div class="entry">
+                    <div class="content-entry">
+                        <a href="https://azure.microsoft.com">
+                            <img src="./img/azure-account.png" alt="img azure account">
+                        </a>
+                        <p><span class="m-left"></span>(Optional) An Azure account. 
+                        If you don’t have one, you can create one.
+                        Just click on the image!!! 
+                        You’ll need this if you want to upload your function to your Azure Portal.</p>
+                    </div><!--.content-entry-->
+                </div><!--.entry-->
+                <div class="entry">
+                    <div class="content-entry">
+                        <a href="https://hub.docker.com/editions/community/docker-ce-desktop-windows?source=post_page---------------------------">
+                            <img src="./img/docker.jpg" alt="img docker">
+                        </a>
+                        <p><span class="m-left"></span>You need to have Docker installed in your computer. 
+                        It’s not necessary to use Azure Functions but I’ll use it in this tutorial. 
+                        I have installed Docker Community Edition, 
+                        you can download it here for free, 
+                        the installation process is simple so I won’t go into details about it. 
+                        Note: It only runs on Windows 10 Pro or Enterprise Edition.</p>
+                    </div><!--.content-entry-->
+                </div><!--.entry-->
+                <div class="entry">
+                    <div class="content-entry">
+                        <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local">
+                            <img class="padding" src="./img/azure-cli.png" alt="img azure cli">
+                        </a>
+                        <p><span class="m-left"></span>Azure CLI, Git and Azure Functions Core Tools v2.x 
+                        (You’ll need to install .NET Core 2.0 and Node.js, 
+                        just follow the instructions and you’re ready to go).</p>
+                    </div><!--.content-entry-->
+                </div><!--.entry-->
+            </div><!--.entry-container-->
+
+            <p class="entry-description">
+            <span class="m-left"></span><span class="upper">Azure Functions</span> is a solution for running relatively small pieces of code in the cloud. 
+            sAs I said previously, the only thing you have to worry about when using Azure Functions 
+            is writing code to solve your problems, nothing else. 
+            You can do it in C#, Node.js, PHP, Python and more, 
+            and you can use NuGet or NPM to manage your dependencies, 
+            it’s not so different from what you’d normally do to develop an application. 
+            Azure scales out and down when needed so you only pay for the time 
+            your code runs (see more) and supports continuous integration. 
+            You can learn more about it here; However, 
+            it won’t be necessary to follow this tutorial.</p>
+        </section>
+
+        <section class="section container">
+            <h2>Wait... What is Docker?</h2>
+            <div class="image">
+                <img src="./img/docker-windows.png" alt="img docker windows">
+            </div>
+            <div class="list-section">
+                <p><span class="m-left"></span><span class="upper">Docker</span> is a tool that lets you create, deploy, and run applications by using containers. 
+                Containers allow you to package up your applications with all of the parts it needs, 
+                such as libraries and other dependencies, and ship it all out as one package, 
+                so you can take for granted that it’ll work on other machines disregarding its configuration. 
+                In this tutorial we are going to run Azure Functions inside a Docker container.</p>
+                If you got here, it means you have everything you need to start so let’s get started!
+            </div>
+        </section><!--.section-->
+
+        <section class="section container">
+            <h3>Creating our app</h3>
+            
+            <div class="list-section">
+                
+                <div id="step1" onclick="showHide(this)" class="bar">
+                    <a><i class="fas fa-plus m-right"></i> Step 1</a> 
+                    <div class="content-bar" id="content-bar-1">
+                        <p>Open Command Prompt and go to the folder where you want to create your project.</p>
+                    </div>
+                </div>
+
+                <div id="step2" onclick="showHide(this)" class="bar">
+                    <a><i class="fas fa-plus m-right"></i> Step 2</a>
+                    <div class="content-bar" id="content-bar-2">
+                        <p>Run the following command:</p>
+                        <img src="./img/elem1.PNG" alt="img elem1">
+                        <img src="./img/elem1.2.PNG" alt="img elem1.2">
+                        <p>This will create all the files needed for the project and 
+                        will initialize a Git repository in the selected location as seen here:</p>
+                        <img src="./img/elem1.3.PNG" alt="img elem1.3">
+                    </div>
+                </div>
+
+                <div id="step3" onclick="showHide(this)" class="bar">
+                    <a><i class="fas fa-plus m-right"></i> Step 3</a>
+                    <div class="content-bar" id="content-bar-3">
+                        <p>In the same location run the following command:</p>
+                        <img src="./img/elem3.PNG" alt="img elem3">
+                        <p>Now you’ll see two options, in this tutorial I’ll use C# 
+                        but you can use JavaScript if you want. 
+                        Just move up and down with the arrow keys and 
+                        press Enter when your option gets highlighted:</p>
+                        <img src="./img/elem3.1.PNG" alt="img elem3.1">
+                        <p>Once you press Enter you’ll have to select a template. 
+                        I‘ll make an HTTP Trigger so I chose that option as shown in this screenshot:</p>
+                        <img src="./img/elem3.2.PNG" alt="img elem3.2">
+                        <p>Press Enter again when you get to your desired option and 
+                        you’ll be asked to enter a name for the function:</p>
+                        <img src="./img/elem3.3.PNG" alt="img elem3.3">
+                        <p>Enter the name and press Enter and the Azure Function will be created.</p>
+                        <img src="./img/elem3.4.PNG" alt="img elem3.4">
+                    </div>
+                </div>
+
+                <div id="step4" onclick="showHide(this)" class="bar">
+                    <a onclick=mostrar()><i class="fas fa-plus m-right"></i> Step 4</a>
+                    <div class="content-bar" id="content-bar-4">
+                        <p>Now that we have our function created, we’ll have to change the Authorization Level. 
+                        Open function.json, modify it to make it look like mine:</p>
+                        <img src="./img/elem4.PNG" alt="img elem4">
+                    </div>
+                </div>
+
+                <div id="step5" onclick="showHide(this)" class="bar">
+                    <a onclick=mostrar()><i class="fas fa-plus m-right"></i> Step 5</a>
+                    <div class="content-bar" id="content-bar-5">
+                        <p>Run this command to build the image from the Dockerfile:</p>
+                        <img src="./img/elem6.PNG" alt="img elem6">
+                    </div>
+                </div>
+
+                <div id="step6" onclick="showHide(this)" class="bar">
+                    <a onclick=mostrar()><i class="fas fa-plus m-right"></i> Step 6</a>
+                    <div class="content-bar" id="content-bar-6">
+                        <p>Run your image! Execute this command (You can modify the port if you want. 
+                        If you changed the name of the container in the 6th step you should use 
+                        that name in this step too):</p>
+                        <img src="./img/elem7.PNG" alt="img elem7">
+                        <img src="./img/elem7.1.PNG" alt="img elem7.1">
+                    </div>
+                </div>
+
+                <div id="step7" onclick="showHide(this)" class="bar">
+                    <a onclick=mostrar()><i class="fas fa-plus m-right"></i> Step 7</a>
+                    <div class="content-bar" id="content-bar-7">
+                        <p>Go to localhost:8080 to see your app working!</p>
+                        <img src="./img/elem8.PNG" alt="img elem8">
+                    </div>
+                </div>
+            </div><!--.list-section-->
+        </section><!--.section-->
+    </div><!--.container-->
+
+    <footer class="site-footer">
+        <div class="clearfix container">
+          <div class="footer-informacion">
+            <h3>Contact <span>Info</span></h3>
+            <img src="./img/gustavo.PNG" alt="avatar">
+            <p class="m-left">Written by Gustavo Aliaga</p>
+          </div>
+          <div class="menu">
+            <h3>Social <span>networs</span></h3>
+            <nav class="social-networs">
+              <a href="https://www.facebook.com/gustavo.aliaga.9"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/gustavoaliaga08/?hl=es-la"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/gustavo-aliaga/"><i class="fab fa-linkedin"></i></a>
+            </nav>
+          </div>
+        </div>
+    
+        <p class="copyright container">Copyright, 2019 &copy;</p>
+      </footer>
+
+      <span class="go-up" id="go-up"><i class="fas fa-chevron-circle-up"></i></span>
+</body>
+</html>
+
+<!--
+
+-------------------------------------------------------------------------------------
+BIBLIOGRAPHY:
+FOR INFORMATION: 
+1- https://medium.com/@nahuelfedericoberg/azure-functions-docker-basic-demo-4a01be1c15bd
+2- https://www.youtube.com/watch?time_continue=1&v=8-jz5f_JyEQ
+3- https://azure.microsoft.com/es-mx/free/search/?&OCID=AID2000049_SEM_g71sH5MD&MarinID=g71sH5MD_340858552787_azure_e_c__62389742054_aud-411628295274:kwd-49508422&lnkd=Google_Azure_Brand&dclid=CjkKEQjwpuXpBRDG4vap5eX-2cYBEiQAKQvyr6rY8Iop0cfKSjFeaQ_cqJCi98g7ivVY4Tah9-agRVLw_wcB
+4- https://azure.microsoft.com/en-au/
+5- https://hub.docker.com/editions/community/docker-ce-desktop-windows?source=post_page---------------------------
+6- https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local
+
+FOR DEVELOPING:
+1- https://www.udemy.com/desarrollo-web-completo-con-html5-css3-js-php-y-mysql
+2- http://www.falconmasters.com/
+3- https://www.youtube.com/watch?v=FqSokw58eSM
+
+-->
